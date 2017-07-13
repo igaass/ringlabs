@@ -1,5 +1,5 @@
 # ringlabs
-cd to the project dir
+CD to the project dir and
 execute command:
 
 ```
