@@ -1,0 +1,7 @@
+.tox/
+.coverage
+.coverage.*
+.cache
+*.egg-info/
+.installed.cfg
+*.egg
