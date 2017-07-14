@@ -4,9 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from xvfbwrapper import Xvfb
 
-SEARCH_NAME = "PSY Gangnam"
+SEARCH_NAME = "music"
 URL = 'https://www.youtube.com/results?q={}&sp=CAM%253D'.format(SEARCH_NAME)
 EXTENSION = "adblockpluschrome-1.13.3.1789.crx"
 RESULTS_PAGE_LOCATOR = "results"
@@ -51,7 +50,6 @@ def check_if_videos_has_ad():
     for i in range(VIDEO_TRIES):
         check = find_ad()
         video_name = "{} has ad: {}".format(get_text(), check)
-        driver.save_screenshot("screenshots/{}{}.png".format(video_name[0:15], check))
         if i < VIDEO_TRIES:
             driver.find_element_by_xpath(NEXT_BUTTON).click()
         print(video_name)
@@ -64,19 +62,18 @@ def navigate_to_results():
     )
 
 
-with Xvfb() as xvfb:
-    print('-' * 7 + ' Starting test without adblock ' + '-' * 7 + '\n')
-    driver = setup()
-    navigate_to_results()
-    first_video = driver.find_element_by_xpath(FIRST_ELEMENT_OF_RESULTS)
-    first_video.click()
-    check_if_videos_has_ad()
-    driver.quit()
+print('-' * 7 + ' Starting test without adblock ' + '-' * 7 + '\n')
+driver = setup()
+navigate_to_results()
+first_video = driver.find_element_by_xpath(FIRST_ELEMENT_OF_RESULTS)
+first_video.click()
+check_if_videos_has_ad()
+driver.quit()
 
-    print('\n' + '-' * 7 + ' Starting test with adblock ' + '-' * 7 + '\n')
-    driver = setup(with_adblock=True)
-    navigate_to_results()
-    first_video = driver.find_element_by_xpath(FIRST_ELEMENT_OF_RESULTS)
-    first_video.click()
-    check_if_videos_has_ad()
-    driver.quit()
+print('\n' + '-' * 7 + ' Starting test with adblock ' + '-' * 7 + '\n')
+driver = setup(with_adblock=True)
+navigate_to_results()
+first_video = driver.find_element_by_xpath(FIRST_ELEMENT_OF_RESULTS)
+first_video.click()
+check_if_videos_has_ad()
+driver.quit()
