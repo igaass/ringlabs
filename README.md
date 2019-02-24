@@ -1,4 +1,4 @@
-# ringlabs
+# Check ad display during YouTube video playback
 CD to the project dir and
 execute command:
 
